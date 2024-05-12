@@ -21,41 +21,17 @@
 import java.util.*;
 
 class Solution {
-    public int[] solution(int[] prices) {
-        int[] answer = new int[prices.length];
-        int count = 0;
-        Queue<Integer> queue = new LinkedList<>();
-        
-        for(int p : prices){
-            queue.add(p);
-        }
-        int number = 0;
-        
-        while (queue.peek() != null) {
-            int value = queue.poll();
+	public int[] solution(int[] prices) {
+		int[] answer = new int[prices.length];
 
-            answer[number] = 0;
-
-            for (Integer integer : queue) {
-                answer[number]++;
-                if (value > integer) {
-                    break;
-                }
-            }
-
-            number++;
-        }
-//         Deque<int> deque = new ArrayDeque<>();
-        
-//         int i = 0;
-//         for(int j=0;j<prices.length;j++){
-//             count++;
-            
-            
-//             deque.offerFirst(p);
-//         }
-        
-        
-        return answer;
-    }
+		for (int i = 0; i < prices.length; i++) {
+			for (int j = i + 1; j < prices.length; j++) {
+				answer[i]++; // 뒤에 있는 값들 보다 작거나 같을 때 인덱스 값 하나씩 추가
+				if (prices[i] > prices[j]) { // 크면 다음 인데스 비교
+					break;
+				}
+			}
+		}
+		return answer;
+	}
 }
